@@ -1,0 +1,56 @@
+version: "3.5"
+
+services:
+  chargermgmtstd:
+    image : sgc-dev-registry.deltaww.com/chargermgmtstd:0.2.33
+    container_name: chargermgmtstd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 5200:5200
+    networks:
+      - default
+    working_dir: /app
+    volumes:
+      - /opt/delta/chargermgmtstd/logs:/app/logs
+      - /opt/delta/chargermgmtstd/appsettings.json:/app/appsettings.json
+      - /opt/delta/chargermgmtstd/evmstd_install_config.txt:/app/evmstd_install_config.txt
+      - /opt/delta/chargermgmtstd/mac.list:/app/mac.list
+      #- /opt/delta/chargermgmtstd/Lang:/app/Lang
+    environment:
+      #- EM_MYSQL_DB=Server=172.17.0.1;Port=3306;Database=ChargeMgmt;Uid=chargemgmt;PWD=[REDACTED] Timeout=120;default command timeout=600;
+      - EM_MYSQL_DB=Server=172.17.0.1;Port=3306;Database=ChargeMgmt;Uid=chargemgmt;PWD=[REDACTED] Timeout=120;default command timeout=600;
+      - EVS_BASE_URL=http://ev-solution-api-pro:8000/v1
+      - EVS_SOCKET_IO_URL=http://ev-solution-api-pro:8100/realtime-service
+      - EVS_SOCKET_IO_PATH=/socket.io
+      - USE_AUTHENTICATION_SERVICE=TRUE
+      #- AUTHENTICATION_URL=http://172.17.0.1:8580
+      - AUTHENTICATION_URL=http://172.17.0.1:8580
+      #- AUTHENTICATION_SITE=
+      #- AUTHENTICATION_PERMISSION=
+      - CPO_ID=TWN000001
+      - SITE_ID=1717752326
+      - MQTT_PROXY_URL=http://ev-mqtt-proxy:8200
+      - PARK_FEE_OPTION_ENABLE=FALSE
+      - LOCAL_TIME_SPAN=8
+      - CURRENCY_LANGUAGE_COUNTRY_CODE=zh-TW
+      - CURRENCY_CODE=TWD
+      - CURRENCY_DECIMAL_POINT_AFTER=0
+      - CURRENCY_DECIMAL_POINT_FORMAT=0
+      - CURRENCY_MIDPOINT_ROUNDING=ToPositiveInfinity
+      #- CURRENCY_LANGUAGE_COUNTRY_CODE=en-US
+      #- CURRENCY_CODE=USD
+      #- CURRENCY_DECIMAL_POINT_AFTER=2
+      #- CURRENCY_DECIMAL_POINT_FORMAT=0.00
+      #- CURRENCY_MIDPOINT_ROUNDING=AwayFromZero
+      #- IEC62443_ENABLE=TRUE
+      - IEC62443_ENABLE=FALSE
+      - ENABLE_REPORT_PTO=FALSE
+    restart: always
+networks:
+  default:
+    external:
+      name: charger_management

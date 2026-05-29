@@ -1,0 +1,60 @@
+version: "3.4"
+
+services:
+  app:
+    #image : sgc-dev-registry.deltaww.com/ev-solution-api-deploy:0.1.67
+    image : sgc-registry.deltaww.com/deltagrid-ev/ev-solution-api-deploy:0.1.67
+    container_name: ev-solution-api-pro
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 8000:8000
+      - 8100:8100
+    #working_dir: /ev-solution-api
+    working_dir: /ev-wrapper-api
+    volumes:
+      #- /opt/delta/ev-solution-api/logs:/ev-solution-api/logs
+      - /opt/delta/ev-solution-api/logs:/ev-wrapper-api/logs
+    environment:
+      - NODE_ENV=production
+      - HOST=127.0.0.1
+      - PROD_DB_USERNAME=sa
+      - PROD_DB_PASSWORD=[REDACTED]
+      - PROD_DB_NAME=EVCS_STD_OCPP_15_modEntities
+      - PROD_DB_HOSTNAME=10.137.105.18
+      - PROD_DB_PPORT=1433
+      - EZQC_SITE_ID=1717752326
+      - EZQC_SITE_NAME=GibTai_0000140
+      - EZQC_APP_NAME=GibTai_0000140
+      - EZQC_CLIENT_ID=1717752326
+      - EZQC_CLIENT_NAME=GibTai_0000140
+      #- EZQC_API_HOST=http://172.17.0.1
+      - EZQC_API_HOST=http://172.17.0.1
+      - EZQC_API_PORT=3333
+      - EZQC_API_REFRESH_INTERVAL=3h
+      - EZQC_API_ENABLE_TOKEN=false
+      - EZQC_API_ENABLE_CLIENT_TOKEN=false
+      - BACKEND_API_HOST=ezqc
+      - ENABLE_PUSH_LOG=false
+      - WRAPPER_API_HOST=0.0.0.0
+      - WRITE_LOG_FILE=true
+      - UPLOAD_API_HOST=0.0.0.0
+      - ENABLE_UPLOAD_TOKEN=false
+      #- REDIS_HOST=172.17.0.1:6379
+      - REDIS_HOST=172.17.0.1:6379
+      #- CACHE_HOST_NAME=172.17.0.1:6379
+      - CACHE_HOST_NAME=172.17.0.1:6379
+      - CACHE_PASSWORD=[REDACTED]
+      - ENABLE_REDIS_TLS=false
+      - FW_SERVICE_ENABLE=false
+      - ENABLE_SOCKETIO_ADAPTER=false
+      - CLOUD_STORAGE_ENABLE=false
+      - ENABLE_CHARGER_NETWORK_STATUS_NOTIFY=false
+    restart: always
+networks:
+  default:
+    external:
+      name: charger_management

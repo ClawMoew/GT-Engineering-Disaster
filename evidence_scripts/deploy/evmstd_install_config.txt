@@ -1,0 +1,45 @@
+
+EV Charger Management Standard v.1.4.4.hf7 
+Installation MetaData: 
+
+repackInstaller=y
+
+computerBrandName=Asus
+computerModelName=TS100
+computerSn=JBS0GX00011R
+
+deployWorkingDir=/home/[USER_REDACTED]/EV_Mgmt_Std_Deploy_v.1.4.4.hf7
+localTimeSpan=8
+cpoId=TWN000001
+cpoName=GibTai
+siteId=1717752326
+siteName=GibTai_0000140
+iotHubDeviceName=EVCM-STD-TWN0000011717752326
+mqttProxyClientId=EVCM-STD-TWN0000011717752326
+maxAllowedChargers=150
+ocppPort=6002
+latitude=[REDACTED]
+longitude=[REDACTED]
+mysqlRootPASS=[REDACTED]
+dockerIpRange=[VERSION_REDACTED]
+dockerIpGateway=[VERSION_REDACTED]
+
+installDT=2024-06-07 17:25:46
+installedVersion=v.1.4.4.hf7
+authServerApiVersion=[VERSION_REDACTED]
+authServerUiVersion=4.0.39
+wrapperApiVersion=0.1.67
+mqttProxyVersion=0.0.12
+cmWebApiVersion=0.2.33
+cmWebUiVersion=[VERSION_REDACTED]
+osLogin=administrator
+osPASSWD=[REDACTED]
+adminLogin=sysadmin
+adminPASSWD=[REDACTED]
+adminEmail=[REDACTED_EMAIL]
+officeLogin=officeadmin
+officePASSWD=[REDACTED]
+officeEmail=[REDACTED_EMAIL]
+
+macAddress=04:92:26:b7:ab:20, 04:92:26:b7:ab:21
+

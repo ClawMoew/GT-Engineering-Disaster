@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+  app:
+    image : sgc-dev-registry.deltaww.com/ev-mqtt-proxy:CHANGE_VERSION_MQTT_PROXY
+    container_name: ev-mqtt-proxy
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 8200:8200
+    working_dir: /ev-mqtt-proxy
+    volumes:
+      - /opt/delta/ev-mqtt-proxy/logs:/ev-mqtt-proxy/logs
+      - /opt/delta/ev-mqtt-proxy/cert:/ev-mqtt-proxy/cert
+    environment:
+      - NODE_ENV=production
+      - CLIENT_ID=EVCM-STD-CHANGE_CPO_ID_NUMBERCHANGE_SITE_ID_NUMBER
+      - CER_PATH=/ev-mqtt-proxy/cert
+      - BROKER_URL=mqtts://deltagrid-iot.deltaww.com
+      - BROKER_PORT=8883
+      - CM_API_HOST=http://chargermgmtstd
+      - CM_API_PORT=5200
+      - TELEMETRY_INTERVAL_MINUTES=10
+    restart: always
+networks:
+  default:
+    external:
+      name: charger_management

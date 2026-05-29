@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# ------------------------------------------------------ 
+## 
+# Charger Management Standard  
+# Program Installation. 
+# For Ubuntu 20.04 LTS. 
+# 00. install progress flag variables. 
+# Execute this script in console from GUI mode. 
+# 
+## 
+
+# After Install Ubuntu Desktop 20.04 LTS with minimal installation. 
+
+
+# install progress flags.
+progress_file=evmstd_install_progress.txt
+progress_file_previous=evmstd_install_progress_previous.txt
+progress_flag_error=0
+progress_install_config_input=installConfigInput
+progress_install_config_save=installConfigSave
+progress_init_os_upd=initOsUpd
+progress_pkg_sshd=install_pkg_sshd
+progress_pkg_sys_tool=install_pkg_systemTools
+progress_pkg_libreoffice=install_pkg_libreOffice
+progress_pkg_dev_tool=install_pkg_developerTools
+progress_pkg_antivirus=install_pkg_antivirus
+progress_pkg_wireshark=install_pkg_wireshark
+progress_create_inst_path=create_instPath
+progress_create_sys_log_rotate_file_evcore=create_system_log_rotate_file_evcore
+progress_fetch_mysql_installer=fetch_mysql_installer
+progress_pkg_mysql_server=install_pkg_mysqlServer
+progress_set_mysql_del_bin_log_file=set_mysql_del_bin_log_file
+progress_pkg_mysql_client=install_pkg_mysqlClient
+progress_pkg_redis=install_pkg_redis
+progress_set_redis_ip=setup_redis_bind_ip
+progress_set_redis_service=set_redis_service_delay
+progress_pkg_docker=install_pkg_docker
+progress_set_docker_ip=set_docker_ip
+progress_set_docker_service=set_docker_service_delay
+
+progress_pkg_nvm=install_pkg_nvm
+progress_chk_pkg_nvm=chk_pkg_nvm
+progress_pkg_nodejs=install_pkg_nodejs
+progress_chk_pkg_nodejs=chk_pkg_nodejs
+progress_chk_pkg_nodejs_ver=v12.21.0
+progress_pkg_pm2=install_pkg_pm2
+
+progress_install_evcore=install_evcore
+progress_set_ev_core_auto_start=set_ev_core_auto_start
+progress_set_pm2_service=set_pm2_service_delay
+
+progress_setup_db_web_api=setup_db_schema_web_api
+progress_setup_docker_compose_web_api=setup_docker_compose_web_api
+progress_setup_docker_compose_wrapper_api=setup_docker_compose_wrapper_api
+progress_setup_docker_compose_mqtt_proxy=setup_docker_compose_mqtt_proxy
+
+progress_retrieve_docker_img=retrieve_dockerImg
+progress_save_docker_img=save_dockerImg
+progress_load_docker_img=load_dockerImg
+progress_create_docker_network=create_docker_network
+
+progress_setup_nginx_config_auth=setup_nginx_config_auth_server
+progress_setup_docker_compose_auth_server=setup_docker_compose_auth_server
+progress_start_auth_server=start_auth_server
+progress_setup_mongo_db_auth=setup_mongo_db_auth_server
+progress_setup_db_auth_server=setup_db_schema_auth_server
+progress_restart_auth_server=restart_auth_server
+progress_update_db_schema_auth_1_4_41=progress_update_db_schema_auth_server_1_4_41
+progress_update_db_schema_auth_1_4_43=progress_update_db_schema_auth_server_1_4_43
+progress_update_db_schema_auth_1_4_47=progress_update_db_schema_auth_server_1_4_47
+
+progress_start_wrapper_api=start_wrapper_api
+progress_start_mqtt_proxy=start_mqtt_proxy
+progress_create_license_key=create_license_key
+progress_start_web_api=start_web_api
+
+progress_set_db_backup_script=set_db_backup_script
+progress_set_db_backup_script_mongo=set_db_backup_script_mongo
+progress_copy_log_retrieve_script=copy_log_retrieve_script
+progress_copy_gen_mac_script=copy_gen_mac_script
+
+progress_remove_script_file_license=remove_script_file_license
+progress_remove_installer_file_zip=remove_installer_file_zip
+progress_repack_installer_file=repack_installer_file
+
+progress_done=done
+
+

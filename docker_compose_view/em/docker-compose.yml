@@ -1,0 +1,123 @@
+version: "3.5"
+
+services:
+  em-mongodb:
+    image : mongo:4.0.18
+    container_name: em-mongodb
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 27017:27017
+    volumes:
+      - /opt/delta/em/data/mongodb:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=[REDACTED]
+    restart: always
+  em-nginx:
+    image : nginx:1.21.0-alpine
+    container_name: em-nginx
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 80:80
+    volumes:
+      - /opt/delta/em/data/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    restart: always
+    depends_on:
+      - em-ocos-api
+      - em-ocos
+    restart: always
+  em-ocos:
+    image : sgc-dev-registry.deltaww.com/deltagrid_em_frontend_prod:4.0.39
+    container_name: em-ocos
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 4201:4200
+    environment:
+      - ts=1611716299999
+    restart: always
+  charger_management_frontend_std:
+    image : sgc-registry.deltaww.com/deltagrid-ap/ev-on-premise/frontend:1.4.5.1
+    container_name: charger_management_frontend_std
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 4200:4200
+    environment:
+      - ts=1611716299999
+    restart: always
+  em-ocos-api:
+    image : sgc-registry.deltaww.com/em/sgc2019-ocos-api:1.4.47.3
+    container_name: em-ocos-api
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    ports:
+      - 8580:8580
+    volumes:
+      - /opt/delta/em/data/em-api-logs:/ocos/logs
+    environment:
+      #- DOMAIN=http://127.0.0.1/authservice
+      - DOMAIN=http://172.17.0.1/authservice
+      - PROJECT_NAME=
+      - WEB_DIR=media_upload
+      - LOG_KEEP_DAYS=150
+      - LOG_LEVEL=trace
+      - LOG_TYPES=console,dateFile
+      - MONGODB_URL=mongodb://sgc-dev:[REDACTED]@em-mongodb:27017/ocos
+      - MYSQL_HOST=172.17.0.1
+      - MYSQL_PORT=3306
+      - MYSQL_USER=sgc-dbuser
+      - MYSQL_PWD=[REDACTED]
+      - MYSQL_DB=DeltaGridEM.Web
+      - REDIS_HOST=172.17.0.1
+      - REDIS_PORT=6379
+      - DEFAULT_PWD=[REDACTED]
+      - SMTP_ENABLE=false
+      - SMPT_HOST=deltarelay.deltaww.com
+      - SMPT_PORT=25
+      - SMPT_ACCOUNT=[REDACTED_ADMIN]
+      - SMPT_PASSWORD=[REDACTED]
+      - SMPT_SECURE=false
+      - IOT_HUB_ENABLE=false
+      #- IOT_HUB_HOST=http://127.0.0.1:9090/
+      - IOT_HUB_HOST=http://172.17.0.1:9090/
+      - IOT_HUB_SSL=false
+      - IOT_HUB_USER=tenant@thingsboard.org
+      - IOT_HUB_PWD=[REDACTED]
+      - AUTH_RSA_PRIVATE=-----BEGIN RSA PRIVATE KEY----- REDACTED_BY_CLAWMOEW_GT_EXPOSE_🐾 -----END RSA PRIVATE KEY-----
+      - AUTH_RSA_PUBLIC=[REDACTED_RSA_KEY]
+      - AUTH_FRONTLINE_PUBLIC=
+      - LINE_QUEUE_TIMEOUT=1 
+      - SCHEDULE_SERVICE_ENABLE=false 
+      - RULE_SERVICE_ENABLE=false 
+      - CONSUMPTION_SERVICE_ENABLE=false 
+      - ENO_ALARM_ENABLE=false
+      - SOURCE_TYPE=MySQL
+      - LOGIN_TOKEN_TTL_DAY=365
+      - ts=1620880197127
+    depends_on:
+      #- em-mysql
+      - em-mongodb
+      #- em-redis
+    restart: always
+networks:
+  default:
+    external:
+      name: em-network

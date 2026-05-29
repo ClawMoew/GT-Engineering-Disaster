@@ -1,0 +1,34 @@
+EVM 社區版的安裝指令修改，
+讓 console 上呈現的指令與輸出訊息皆可以記錄於 log 檔案，
+安裝記錄檔 將會放在安裝目錄的 evmstd_install_log.txt。
+
+
+安裝指令修改如下： 
+執行第 1 個安裝 Shell Script： 
+sudo ./EvMgmtStd_install_01_system.sh 2>&1 | tee -a evmstd_install_log.txt
+
+執行第 2 個安裝 Shell Script：
+./EvMgmtStd_install_02_nvm.sh 2>&1 | tee -a evmstd_install_log.txt
+
+執行第 3 個安裝 Shell Script：
+./EvMgmtStd_install_03_evmgmt.sh 2>&1 | tee -a evmstd_install_log.txt
+
+檢查安裝記錄檔是否有不可預期的錯誤訊息： 
+cat evmstd_install_log.txt | grep -n "error\|warn\|fail"
+
+
+以下是執行上述指令後，預期會有可被忽略的錯誤訊息： (行頭數字是檔案行號) 
+3710:  git-man liberror-perl pigz python3-attr python3-cached-property
+3724:  liberror-perl pigz python3-attr python3-cached-property python3-distutils
+3750:下載:19 http://tw.archive.ubuntu.com/ubuntu focal/main amd64 liberror-perl all 0.17029-1 [26.5 kB]
+3851:選取了原先未選的套件 liberror-perl。
+3852:正在準備解包 .../23-liberror-perl_0.17029-1_all.deb……
+3853:解開 liberror-perl (0.17029-1) 中...
+3870:設定 liberror-perl (0.17029-1) ...
+4102:== 20201102173133-add-errorTime-to-alarm: migrating =======
+4103:== 20201102173133-add-errorTime-to-alarm: migrated (0.015s)
+4253:== 20201228222852-create-ocpp-parse-error: migrating =======
+4254:== 20201228222852-create-ocpp-parse-error: migrated (0.016s)
+4376:Restart=on-failure
+4394:[PM2][ERROR] systemctl enable pm2-administrator failed, see error above.
+
