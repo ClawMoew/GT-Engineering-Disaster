@@ -6,16 +6,16 @@ repackInstaller=y
 
 computerBrandName=Asus
 computerModelName=TS100
-computerSn=JBS0GX00011R
+computerSn=[SERIAL_REDACTED]
 
 deployWorkingDir=/home/[USER_REDACTED]/EV_Mgmt_Std_Deploy_v.1.4.4.hf7
 localTimeSpan=8
-cpoId=TWN000001
-cpoName=GibTai
-siteId=1717752326
-siteName=GibTai_0000140
-iotHubDeviceName=EVCM-STD-TWN0000011717752326
-mqttProxyClientId=EVCM-STD-TWN0000011717752326
+cpoId=[CPO_REDACTED]
+cpoName=[CPO_REDACTED]
+siteId=[SITEID_REDACTED]
+siteName=[SITE_REDACTED]
+iotHubDeviceName=[DEVICEID_REDACTED]
+mqttProxyClientId=[DEVICEID_REDACTED]
 maxAllowedChargers=150
 ocppPort=6002
 latitude=[REDACTED]

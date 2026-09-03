@@ -6,6 +6,7 @@ This repository provides a technical audit of industrial software deployment scr
 **Legal & Ethical Compliance:**
 - **Zero-Credential Policy**: All original passwords, RSA keys, and tokens have been programmatically REMOVED or REDACTED.
 - **Privacy Protection**: Geographical data (GPS coordinates) has been Anonymized.
+- **Site Anonymization (2026-09-03)**: Deployment identifiers (CPO ID/name, site ID/name, IoT device IDs, hardware serial number) have been redacted.
 - **Fair Use**: This repository exists for security educational purposes and the promotion of public infrastructure safety.
 
 ## Technical Risk Summary:

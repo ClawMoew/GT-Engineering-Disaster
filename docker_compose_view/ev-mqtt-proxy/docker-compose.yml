@@ -17,7 +17,7 @@ services:
       - /opt/delta/ev-mqtt-proxy/cert:/ev-mqtt-proxy/cert
     environment:
       - NODE_ENV=production
-      - CLIENT_ID=EVCM-STD-TWN0000011717752326
+      - CLIENT_ID=[DEVICEID_REDACTED]
       - CER_PATH=/ev-mqtt-proxy/cert
       - BROKER_URL=mqtts://deltagrid-iot.deltaww.com
       - BROKER_PORT=8883
